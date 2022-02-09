@@ -194,5 +194,3 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEVOPS_WEBHOOK }} # required
         if: failure() # Pick up events even if the job fails or is canceled.
 
-
-
