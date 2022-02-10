@@ -4,4 +4,4 @@ This service provides a mock implementation of Bio-SDK REST Service. It by defau
 To know more about Biometric SDK, refer [here](https://docs.mosip.io/1.2.0/biometrics/biometric-sdk).
 
 ### License
-This project is licensed under the terms of [Mozilla Public License 2.0](https://github.com/mosip/mosip-platform/blob/master/LICENSE)
+This project is licensed under the terms of [Mozilla Public License 2.0](LICENSE).
