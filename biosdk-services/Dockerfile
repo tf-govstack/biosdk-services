@@ -8,8 +8,10 @@ ARG biosdk_local_dir=biosdk-client
 
 ENV biosdk_local_dir_name=${biosdk_local_dir}
 
+ARG sdk_impl
+
 #ENV biosdk_zip_url=$biosdk_zip_url
-ENV biosdk_bioapi_impl=$biosdk_bioapi_impl
+ENV biosdk_bioapi_impl=${sdk_impl}
 
 # can be passed during Docker build as build time environment for github branch to pickup configuration from.
 ARG container_user=mosip
@@ -58,4 +60,5 @@ EXPOSE 9099
 
 ENTRYPOINT [ "./configure_biosdk.sh" ]
 
-CMD java -Dloader.path="${loader_path_env}" -jar biosdk-services.jar
+CMD echo $biosdk_bioapi_impl ; \
+java -Dloader.path="${loader_path_env}" -Dbiosdk_bioapi_impl="${biosdk_bioapi_impl}" -jar biosdk-services.jar
