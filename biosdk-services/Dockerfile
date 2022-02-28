@@ -42,6 +42,10 @@ RUN mkdir -p ${loader_path}
 
 ENV loader_path_env=${loader_path}
 
+ARG logging_level_root=INFO
+
+ENV logging_level_root_env=${logging_level_root}
+
 ADD ./target/biosdk-services-*.jar biosdk-services.jar
 
 ADD ./configure_biosdk.sh configure_biosdk.sh
@@ -61,4 +65,4 @@ EXPOSE 9099
 ENTRYPOINT [ "./configure_biosdk.sh" ]
 
 CMD echo $biosdk_bioapi_impl ; \
-java -Dloader.path="${loader_path_env}" -Dbiosdk_bioapi_impl="${biosdk_bioapi_impl}" -Dlogging.level.root=DEBUG -jar biosdk-services.jar
+java -Dloader.path="${loader_path_env}" -Dbiosdk_bioapi_impl="${biosdk_bioapi_impl}" -Dlogging.level.root=${logging_level_root_env} -jar biosdk-services.jar
