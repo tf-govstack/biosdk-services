@@ -23,7 +23,9 @@ public class BioSdkLibConfig {
 
     @PostConstruct
     public void validateBioSdkLib() throws ClassNotFoundException {
-        if (StringUtils.isNotBlank(this.env.getProperty("biosdk_bioapi_impl"))) {
+    	String sdkClass = this.env.getProperty("biosdk_bioapi_impl");
+		logger.info("Biosdk class: " + sdkClass);
+        if (StringUtils.isNotBlank(sdkClass)) {
             logger.debug("validating Bio SDK Class is present or not");
             Class.forName(this.env.getProperty("biosdk_bioapi_impl"));
         }
@@ -34,9 +36,11 @@ public class BioSdkLibConfig {
     @Bean
     @Lazy
     public IBioApi iBioApi() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        if (StringUtils.isNotBlank(this.env.getProperty("biosdk_bioapi_impl"))) {
+    	String sdkClass = this.env.getProperty("biosdk_bioapi_impl");
+		logger.info("Biosdk class: " + sdkClass);
+    	if (StringUtils.isNotBlank(sdkClass)) {
             logger.debug("instance of Bio SDK is created");
-            return (IBioApi)Class.forName(this.env.getProperty("biosdk_bioapi_impl")).newInstance();
+            return (IBioApi)Class.forName(sdkClass).newInstance();
         } else {
             logger.debug("no Bio SDK is provided");
             throw new RuntimeException("No Bio SDK is provided");

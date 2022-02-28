@@ -61,4 +61,4 @@ EXPOSE 9099
 ENTRYPOINT [ "./configure_biosdk.sh" ]
 
 CMD echo $biosdk_bioapi_impl ; \
-java -Dloader.path="${loader_path_env}" -Dbiosdk_bioapi_impl="${biosdk_bioapi_impl}" -jar biosdk-services.jar
+java -Dloader.path="${loader_path_env}" -Dbiosdk_bioapi_impl="${biosdk_bioapi_impl}" -Dlogging.level.root=DEBUG -jar biosdk-services.jar
