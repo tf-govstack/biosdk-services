@@ -11,10 +11,12 @@ import io.mosip.biosdk.services.spi.BioSdkServiceProvider;
 import io.mosip.biosdk.services.utils.Utils;
 import io.mosip.kernel.biometrics.spi.IBioApi;
 import io.mosip.kernel.core.logger.spi.Logger;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -36,7 +38,7 @@ import static io.mosip.biosdk.services.constants.AppConstants.LOGGER_SESSIONID;
 
 @RestController
 @RequestMapping("/")
-@Api(tags = "Sdk")
+@Tag(name = "Sdk", description = "Sdk")
 @CrossOrigin("*")
 public class MainController {
 
@@ -54,8 +56,12 @@ public class MainController {
     private Gson gson = new GsonBuilder().serializeNulls().create();;
 
     @GetMapping(path = "/")
-    @ApiOperation(value = "Service status")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Service is running...") })
+    @Operation(summary = "Service status", description = "Service status", tags = { "Sdk" })
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "201", description = "Service is running...", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true))) })
     public ResponseEntity<String> status() {
         Date d = new Date();
         return ResponseEntity.status(HttpStatus.OK).body("Service is running... "+d.toString());
@@ -64,16 +70,24 @@ public class MainController {
     //@PreAuthorize("hasAnyRole('REGISTRATION_PROCESSOR')")
     @PreAuthorize("hasAnyRole(@authorizedRoles.getGetservicestatus())")
     @GetMapping(path = "/s")
-    @ApiOperation(value = "Service status 1")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Service is running...") })
+    @Operation(summary = "Service status 1", description = "Service status 1", tags = { "Sdk" })
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "201", description = "Service is running...", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true))) })
     public ResponseEntity<String> status1() {
         Date d = new Date();
         return ResponseEntity.status(HttpStatus.OK).body("Service is running... "+d.toString());
     }
 
     @PostMapping(path = "/init", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Initialization")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Initialization successful") })
+    @Operation(summary = "Initialization", description = "Initialization", tags = { "Sdk" })
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "201", description = "Initialization successful", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true))) })
     public ResponseEntity<String> init(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
@@ -93,8 +107,12 @@ public class MainController {
     }
 
     @PostMapping(path = "/match", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Match")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Match successful") })
+    @Operation(summary = "Match", description = "Match", tags = { "Sdk" })
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "201", description = "Match successful", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true))) })
     public ResponseEntity<String> match(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
@@ -114,8 +132,12 @@ public class MainController {
     }
 
     @PostMapping(path = "/check-quality", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Check quality")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Check successful") })
+    @Operation(summary = "Check quality", description = "Check quality", tags = { "Sdk" })
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "201", description = "Check successful", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true))) })
     public ResponseEntity<String> checkQuality(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
@@ -134,9 +156,12 @@ public class MainController {
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(responseDto));
     }
 
-    @PostMapping(path = "/extract-template", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Extract template")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Extract successful") })
+    @Operation(summary = "extract-template", description = "extract-template", tags = { "Sdk" })
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "201", description = "Extract successful", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true))) })
     public ResponseEntity<String> extractTemplate(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
@@ -156,8 +181,12 @@ public class MainController {
     }
 
     @PostMapping(path = "/convert-format", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Convert format")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Convert successful") })
+    @Operation(summary = "Convert format", description = "Convert format", tags = { "Sdk" })
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "201", description = "Convert successful", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true))) })
     public ResponseEntity<String> convertFormat(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
@@ -177,8 +206,12 @@ public class MainController {
     }
 
     @PostMapping(path = "/segment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Segment")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Segment successful") })
+    @Operation(summary = "Segment", description = "Segment", tags = { "Sdk" })
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "201", description = "Segment successful", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(hidden = true))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true))) })
     public ResponseEntity<String> segment(
             @Validated @RequestBody(required = true) RequestDto request,
             @ApiIgnore Errors errors) {
