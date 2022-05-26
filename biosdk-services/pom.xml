@@ -25,6 +25,7 @@
 
         <!-- Swagger -->
         <swagger.version>2.9.2</swagger.version>
+        <springdoc.version>1.5.10</springdoc.version>
 
         <!-- Mosip kernel -->
         <kernel.biometricsdk.version>1.2.0-rc2-SNAPSHOT</kernel.biometricsdk.version>
@@ -88,6 +89,11 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>io.mosip.kernel</groupId>
