@@ -75,9 +75,21 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     }
 
     @Bean
+
+    public Docket api() {
+        if(swaggerBaseUrl !=null){
+            String newSwaggerBaseUrl=swaggerBaseUrl.replace(":80", "");
+            swaggerBaseUrl = newSwaggerBaseUrl;
+        }
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+
     public GroupedOpenApi groupedOpenApi() {
         return GroupedOpenApi.builder().group(openApiProperties.getGroup().getName())
                 .pathsToMatch(openApiProperties.getGroup().getPaths().stream().toArray(String[]::new))
+
                 .build();
     }
 
