@@ -6,13 +6,17 @@
 
 	<artifactId>biosdk-services</artifactId>
 	<groupId>io.mosip.biosdk</groupId>
-	<version>1.2.1-SNAPSHOT</version>
+	<version>1.2.0.1-SNAPSHOT</version>
 	<name>biosdk-services</name>
 
 	<description>Sample implementation of biometrics SDK services</description>
 	<url>https://github.com/mosip/mosip-ref-impl</url>
 
 	<properties>
+		<java.version>11</java.version>
+      	<!-- maven -->
+		<maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 		<!-- Core -->
 		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
 		<spring-cloud-config.version>2.0.2.RELEASE</spring-cloud-config.version>
@@ -27,9 +31,11 @@
 		<swagger.version>2.9.2</swagger.version>
 
 		<!-- Mosip kernel -->
-		<kernel.biometricsdk.version>1.2.1-SNAPSHOT</kernel.biometricsdk.version>
-		<kernel.logger.logback.version>1.2.1-SNAPSHOT</kernel.logger.logback.version>
-		<kernel.core.version>1.2.1-SNAPSHOT</kernel.core.version>
+		<kernel.biometricsdk.version>1.2.0.1-SNAPSHOT</kernel.biometricsdk.version>
+		<kernel.logger.logback.version>1.2.0.1-SNAPSHOT</kernel.logger.logback.version>
+		<kernel.core.version>1.2.0.1-SNAPSHOT</kernel.core.version>
+		<!-- Spring -->
+		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -135,12 +141,7 @@
 			<artifactId>gson</artifactId>
 			<version>2.8.6</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.github.jai-imageio/jai-imageio-jpeg2000 -->
-		<dependency>
-		    <groupId>com.github.jai-imageio</groupId>
-		    <artifactId>jai-imageio-jpeg2000</artifactId>
-		    <version>1.3.0</version>
-		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -179,20 +180,27 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>11</source>
-					<target>11</target>
-				</configuration>
+				 <groupId>org.apache.maven.plugins</groupId>
+			   <artifactId>maven-compiler-plugin</artifactId>
+			   <version>3.8.0</version>
+			   <configuration>
+			      <source>${maven.compiler.source}</source>
+			      <target>${maven.compiler.target}</target>
+			   </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
 				<configuration>
 					<layout>ZIP</layout>
 					<executable>true</executable>
+					<jvmArguments>
+					      <source>${maven.compiler.source}</source>
+					      <target>${maven.compiler.target}</target>
+					</jvmArguments>
 				</configuration>
+				
 				<executions>
 					<execution>
 						<goals>
@@ -201,6 +209,7 @@
 						</goals>
 					</execution>
 				</executions>
+				
 			</plugin>
 		</plugins>
 	</build>
