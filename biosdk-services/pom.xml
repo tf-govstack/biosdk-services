@@ -48,9 +48,9 @@
         <swagger.version>2.9.2</swagger.version>
 
         <!-- Mosip kernel -->
-        <kernel.biometricsdk.version>1.2.0-rc2-SNAPSHOT</kernel.biometricsdk.version>
-        <kernel.logger.logback.version>1.2.0-rc2-SNAPSHOT</kernel.logger.logback.version>
-        <kernel.core.version>1.2.0-rc2-SNAPSHOT</kernel.core.version>
+        <kernel.biometricsdk.version>1.2.0</kernel.biometricsdk.version>
+        <kernel.logger.logback.version>1.2.0.1-B1</kernel.logger.logback.version>
+        <kernel.core.version>1.2.0.1-B1</kernel.core.version>
     </properties>
 
     <dependencyManagement>
