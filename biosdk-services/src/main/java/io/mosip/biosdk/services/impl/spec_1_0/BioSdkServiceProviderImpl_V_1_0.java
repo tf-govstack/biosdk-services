@@ -11,7 +11,7 @@ import io.mosip.biosdk.services.spi.BioSdkServiceProvider;
 import io.mosip.biosdk.services.utils.Utils;
 import io.mosip.kernel.biometrics.model.Response;
 import io.mosip.kernel.biometrics.model.SDKInfo;
-import io.mosip.kernel.biometrics.spi.IBioApi;
+import io.mosip.kernel.biometrics.spi.IBioApiV2;
 import io.mosip.kernel.core.logger.spi.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,7 +31,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
     private static final String privateKey = "";
 
     @Autowired
-    private IBioApi iBioApi;
+    private IBioApiV2 iBioApi;
 
     @Autowired
     private Utils serviceUtil;
@@ -153,7 +153,7 @@ public class BioSdkServiceProviderImpl_V_1_0 implements BioSdkServiceProvider {
         ConvertFormatRequestDto convertFormatRequestDto = gson.fromJson(decryptedRequest, ConvertFormatRequestDto.class);
         logger.debug(LOGGER_SESSIONID, LOGGER_IDTYPE,"convertFormat: ", "json to dto successful");
         try {
-        	response = iBioApi.convertFormat(
+        	response = iBioApi.convertFormatV2(
                     convertFormatRequestDto.getSample(),
                     convertFormatRequestDto.getSourceFormat(),
                     convertFormatRequestDto.getTargetFormat(),
