@@ -4,7 +4,7 @@
 
 # Bio-SDK Service
 
-## Overview
+### Overview
 This is reference service and provides a mock implementation of Bio-SDK REST Service. By default loads [Mock BIO SDK](https://github.com/mosip/mosip-mock-services/tree/master/mock-sdk) internally on the startup and exposes the endpoints to perform 1:1 match, extraction as per the [IBioAPI](https://github.com/mosip/commons/blob/master/kernel/kernel-biometrics-api/src/main/java/io/mosip/kernel/biometrics/spi/IBioApi.java).
 
 To know more about Biometric SDK, refer [biometric-sdk](https://docs.mosip.io/1.2.0/biometrics/biometric-sdk).
